@@ -1,0 +1,3 @@
+[submodule "src/main/kotlin/br/com/gmfonseca/tcc/algorithms"]
+	path = src/main/kotlin/br/com/gmfonseca/tcc/algorithms
+	url = git@github.com:gmfonseca/sort-algorithms.git
