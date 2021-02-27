@@ -4,10 +4,10 @@ import br.com.gmfonseca.tcc.algorithms.BubbleSortAlgorithm
 import org.springframework.stereotype.Service
 
 @Service
-class BubbleSortService {
+class BubbleSortService : GenericAlgorithmService {
 
-    fun execute(elements: List<Int>): List<Int> {
-        return BubbleSortAlgorithm<Int>().sort(elements)
+    override fun <T : Comparable<T>> execute(elements: List<T>): List<T> {
+        return BubbleSortAlgorithm<T>().sort(elements)
     }
 
 }

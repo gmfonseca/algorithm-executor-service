@@ -4,10 +4,10 @@ import br.com.gmfonseca.tcc.algorithms.SelectionSortAlgorithm
 import org.springframework.stereotype.Service
 
 @Service
-class SelectionSortService {
+class SelectionSortService : GenericAlgorithmService {
 
-    fun execute(elements: List<Int>): List<Int> {
-        return SelectionSortAlgorithm<Int>().sort(elements)
+    override fun <T : Comparable<T>> execute(elements: List<T>): List<T> {
+        return SelectionSortAlgorithm<T>().sort(elements)
     }
 
 }

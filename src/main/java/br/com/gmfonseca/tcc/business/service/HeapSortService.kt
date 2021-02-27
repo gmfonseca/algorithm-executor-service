@@ -4,10 +4,10 @@ import br.com.gmfonseca.tcc.algorithms.HeapSortAlgorithm
 import org.springframework.stereotype.Service
 
 @Service
-class HeapSortService {
+class HeapSortService : GenericAlgorithmService {
 
-    fun execute(elements: List<Int>): List<Int> {
-        return HeapSortAlgorithm<Int>().sort(elements)
+
+    override fun <T : Comparable<T>> execute(elements: List<T>): List<T> {
+        return HeapSortAlgorithm<T>().sort(elements)
     }
-
 }
