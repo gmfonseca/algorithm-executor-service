@@ -1,0 +1,96 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.14"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61"
+        classpath 'com.android.tools.build:gradle:1.1.2'
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.4.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id 'application'
+    id 'com.google.protobuf' version '0.8.10'
+    id 'java'
+    id 'idea'
+}
+
+group 'br.com.gmfonseca.tcc'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    mavenLocal()
+}
+
+sourceSets {
+    main.java.srcDirs += "${protobuf.generatedFilesBaseDir}/main/javalite"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // Spring boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // gRPC
+    implementation 'javax.annotation:javax.annotation-api:1.2'
+    implementation "io.grpc:grpc-protobuf-lite:1.20.0"
+    implementation 'io.grpc:grpc-stub:1.35.0'
+    implementation 'io.grpc:grpc-netty-shaded:1.34.1'
+}
+
+application {
+    mainClassName = "br.com.gmfonseca.AlgorithmExecutorServiceApplicationKt"
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.9.0'
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.23.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
+    clean {
+        delete protobuf.generatedFilesBaseDir
+    }
+}
+
+idea {
+    module {
+        // Not using generatedSourceDirs because of
+        // https://discuss.gradle.org/t/support-for-intellij-2016/15294/8
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/java");
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc");
+    }
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
