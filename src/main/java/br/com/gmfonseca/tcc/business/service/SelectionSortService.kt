@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class SelectionSortService : GenericAlgorithmService {
+    override val name: String = "Selection Sort"
 
     override fun <T : Comparable<T>> execute(elements: List<T>): List<T> {
         return SelectionSortAlgorithm<T>().sort(elements)

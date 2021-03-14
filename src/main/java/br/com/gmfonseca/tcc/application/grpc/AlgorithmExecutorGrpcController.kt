@@ -4,7 +4,7 @@ import br.com.gmfonseca.tcc.business.service.BubbleSortService
 import br.com.gmfonseca.tcc.business.service.GenericAlgorithmService
 import br.com.gmfonseca.tcc.business.service.HeapSortService
 import br.com.gmfonseca.tcc.business.service.SelectionSortService
-import br.com.gmfonseca.tcc.business.service.model.AnComparableObject
+import br.com.gmfonseca.tcc.business.model.AnComparableObject
 import br.com.gmfonseca.tcc.proto.AlgorithmExecutor
 import br.com.gmfonseca.tcc.proto.AlgorithmExecutorServiceGrpc.AlgorithmExecutorServiceImplBase
 import br.com.gmfonseca.tcc.shared.toAnComparableObjectList

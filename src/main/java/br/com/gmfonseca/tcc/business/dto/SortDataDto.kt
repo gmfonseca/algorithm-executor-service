@@ -1,7 +1,8 @@
 package br.com.gmfonseca.tcc.business.dto
 
-/**
-* Created by Gabriel Fonseca on 07/03/2021.
-*/
-class SortDataDto {
-}
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class SortDataDto(
+    @JsonProperty("type") val type: String,
+    @JsonProperty("elements") val elements: List<Any>
+)
