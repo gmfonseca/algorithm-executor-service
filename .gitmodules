@@ -1,6 +1,0 @@
-[submodule "src/main/proto"]
-	path = src/main/proto
-	url = git@github.com:gmfonseca/algorithm-executor-proto.git
-[submodule "src/main/java/br/com/gmfonseca/tcc/algorithms"]
-	path = src/main/java/br/com/gmfonseca/tcc/algorithms
-	url = git@github.com:gmfonseca/algorithm-executor-sort-algorithms.git
