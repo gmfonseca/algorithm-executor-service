@@ -51,6 +51,7 @@ class AlgorithmExecutorRestController(
         }
 
         println("Successfully run ${service.name} for ${elements.size} elements and typeof ${type.title()}")
+        println()
 
         return result
     }

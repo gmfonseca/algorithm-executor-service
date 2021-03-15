@@ -1,10 +1,10 @@
 package br.com.gmfonseca.tcc.application.grpc
 
+import br.com.gmfonseca.tcc.application.rest.title
 import br.com.gmfonseca.tcc.business.service.BubbleSortService
 import br.com.gmfonseca.tcc.business.service.GenericAlgorithmService
 import br.com.gmfonseca.tcc.business.service.HeapSortService
 import br.com.gmfonseca.tcc.business.service.SelectionSortService
-import br.com.gmfonseca.tcc.business.model.AnComparableObject
 import br.com.gmfonseca.tcc.proto.AlgorithmExecutor
 import br.com.gmfonseca.tcc.proto.AlgorithmExecutorServiceGrpc.AlgorithmExecutorServiceImplBase
 import br.com.gmfonseca.tcc.shared.toAnComparableObjectList
@@ -19,29 +19,12 @@ class AlgorithmExecutorGrpcController : AlgorithmExecutorServiceImplBase() {
     private val selectionSortService = SelectionSortService()
     private val heapSortService = HeapSortService()
 
-    override fun executeBubbleSortAlgorithm(request: AlgorithmExecutor.ExecuteSortAlgorithmRequest, responseObserver: StreamObserver<AlgorithmExecutor.ExecuteAlgorithmResult>) {
+    override fun executeBubbleSortAlgorithm(
+        request: AlgorithmExecutor.ExecuteSortAlgorithmRequest,
+        responseObserver: StreamObserver<AlgorithmExecutor.ExecuteAlgorithmResult>
+    ) {
         try {
-            val result: AlgorithmExecutor.ExecuteAlgorithmResult = when (request.dataCase) {
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.INTEGERLIST -> {
-                    val resultList = bubbleSortService.execute(request.integerList.contentList)
-                    val integerList = AlgorithmExecutor.IntegerList.newBuilder().addAllContent(resultList).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setIntegerList(integerList).build()
-                }
-
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.FLOATLIST -> {
-                    val resultList = bubbleSortService.execute(request.floatList.contentList)
-                    val integerList = AlgorithmExecutor.FloatList.newBuilder().addAllContent(resultList).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setFloatList(integerList).build()
-                }
-
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.OBJECTLIST -> {
-                    val resultList = bubbleSortService.execute(request.objectList.contentList.toAnComparableObjectList())
-                    val integerList = AlgorithmExecutor.ObjectList.newBuilder().addAllContent(resultList.toAnObjectList()).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setObjectList(integerList).build()
-                }
-
-                else -> throw IllegalArgumentException("Unknown data case")
-            }
+            val result: AlgorithmExecutor.ExecuteAlgorithmResult = execute(bubbleSortService, request)
 
             responseObserver.onNext(result)
             responseObserver.onCompleted()
@@ -50,29 +33,12 @@ class AlgorithmExecutorGrpcController : AlgorithmExecutorServiceImplBase() {
         }
     }
 
-    override fun executeSelectionSortAlgorithm(request: AlgorithmExecutor.ExecuteSortAlgorithmRequest, responseObserver: StreamObserver<AlgorithmExecutor.ExecuteAlgorithmResult>) {
+    override fun executeSelectionSortAlgorithm(
+        request: AlgorithmExecutor.ExecuteSortAlgorithmRequest,
+        responseObserver: StreamObserver<AlgorithmExecutor.ExecuteAlgorithmResult>
+    ) {
         try {
-            val result: AlgorithmExecutor.ExecuteAlgorithmResult = when (request.dataCase) {
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.INTEGERLIST -> {
-                    val resultList = selectionSortService.execute(request.integerList.contentList)
-                    val integerList = AlgorithmExecutor.IntegerList.newBuilder().addAllContent(resultList).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setIntegerList(integerList).build()
-                }
-
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.FLOATLIST -> {
-                    val resultList = selectionSortService.execute(request.floatList.contentList)
-                    val integerList = AlgorithmExecutor.FloatList.newBuilder().addAllContent(resultList).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setFloatList(integerList).build()
-                }
-
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.OBJECTLIST -> {
-                    val resultList = selectionSortService.execute(request.objectList.contentList.toAnComparableObjectList())
-                    val integerList = AlgorithmExecutor.ObjectList.newBuilder().addAllContent(resultList.toAnObjectList()).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setObjectList(integerList).build()
-                }
-
-                else -> throw IllegalArgumentException("Unknown data case")
-            }
+            val result: AlgorithmExecutor.ExecuteAlgorithmResult = execute(selectionSortService, request)
 
             responseObserver.onNext(result)
             responseObserver.onCompleted()
@@ -81,29 +47,12 @@ class AlgorithmExecutorGrpcController : AlgorithmExecutorServiceImplBase() {
         }
     }
 
-    override fun executeHeapSortAlgorithm(request: AlgorithmExecutor.ExecuteSortAlgorithmRequest, responseObserver: StreamObserver<AlgorithmExecutor.ExecuteAlgorithmResult>) {
+    override fun executeHeapSortAlgorithm(
+        request: AlgorithmExecutor.ExecuteSortAlgorithmRequest,
+        responseObserver: StreamObserver<AlgorithmExecutor.ExecuteAlgorithmResult>
+    ) {
         try {
-            val result: AlgorithmExecutor.ExecuteAlgorithmResult = when (request.dataCase) {
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.INTEGERLIST -> {
-                    val resultList = heapSortService.execute(request.integerList.contentList)
-                    val integerList = AlgorithmExecutor.IntegerList.newBuilder().addAllContent(resultList).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setIntegerList(integerList).build()
-                }
-
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.FLOATLIST -> {
-                    val resultList = heapSortService.execute(request.floatList.contentList)
-                    val integerList = AlgorithmExecutor.FloatList.newBuilder().addAllContent(resultList).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setFloatList(integerList).build()
-                }
-
-                AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.OBJECTLIST -> {
-                    val resultList = heapSortService.execute(request.objectList.contentList.toAnComparableObjectList())
-                    val integerList = AlgorithmExecutor.ObjectList.newBuilder().addAllContent(resultList.toAnObjectList()).build()
-                    AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setObjectList(integerList).build()
-                }
-
-                else -> throw IllegalArgumentException("Unknown data case")
-            }
+            val result: AlgorithmExecutor.ExecuteAlgorithmResult = execute(heapSortService, request)
 
             responseObserver.onNext(result)
             responseObserver.onCompleted()
@@ -114,16 +63,38 @@ class AlgorithmExecutorGrpcController : AlgorithmExecutorServiceImplBase() {
 
     @Suppress("UNCHECKED_CAST")
     private fun execute(
-            service: GenericAlgorithmService,
-            type: AlgorithmExecutor.DataType,
-            elements: List<Any>
-    ): List<Any> {
-        return when (type) {
-            AlgorithmExecutor.DataType.FLOAT -> service.execute(elements as List<Float>)
-            AlgorithmExecutor.DataType.INTEGER -> service.execute(elements as List<Int>)
-            AlgorithmExecutor.DataType.OBJECT -> service.execute(elements as List<AnComparableObject>)
-            else -> throw IllegalArgumentException("Invalid parameter type $type")
+        service: GenericAlgorithmService,
+        request: AlgorithmExecutor.ExecuteSortAlgorithmRequest
+    ): AlgorithmExecutor.ExecuteAlgorithmResult {
+        val type = request.dataCase.name.substringBefore("LIST").title()
+        println("Start running ${service.name} for typeof $type")
+
+        val result = when (request.dataCase) {
+            AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.INTEGERLIST -> {
+                val resultList = service.execute(request.integerList.contentList)
+                val integerList = AlgorithmExecutor.IntegerList.newBuilder().addAllContent(resultList).build()
+                AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setIntegerList(integerList).build()
+            }
+
+            AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.FLOATLIST -> {
+                val resultList = service.execute(request.floatList.contentList)
+                val integerList = AlgorithmExecutor.FloatList.newBuilder().addAllContent(resultList).build()
+                AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setFloatList(integerList).build()
+            }
+
+            AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.OBJECTLIST -> {
+                val resultList = service.execute(request.objectList.contentList.toAnComparableObjectList())
+                val integerList =
+                    AlgorithmExecutor.ObjectList.newBuilder().addAllContent(resultList.toAnObjectList()).build()
+                AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setObjectList(integerList).build()
+            }
+
+            else -> throw IllegalArgumentException("Unknown data case")
         }
+        println("Successfully run ${service.name} for typeof $type")
+        println()
+
+        return result
     }
 
 }
