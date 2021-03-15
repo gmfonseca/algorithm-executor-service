@@ -14,5 +14,5 @@ fun UUID.toProto(): ProtoUUID = ProtoUUID.newBuilder()
 
 fun AnObject.toAnComparableObject() = AnComparableObject(uuid.toJava(), intNumber, floatNumber)
 
-fun List<AnObject>.toAnComparableObjectList() = map { it.toAnComparableObject() }
+fun List<AnObject>.toAnComparableObjectList() = map { it.toAnComparableObject() }.toMutableList()
 fun List<AnComparableObject>.toAnObjectList() = map { it.toAnObject() }

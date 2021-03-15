@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 class BubbleSortService : GenericAlgorithmService {
     override val name: String = "Bubble Sort"
 
-    override fun <T : Comparable<T>> execute(elements: List<T>): List<T> {
+    override fun <T : Comparable<T>> execute(elements: MutableList<T>): List<T> {
         return BubbleSortAlgorithm<T>().sort(elements)
     }
 

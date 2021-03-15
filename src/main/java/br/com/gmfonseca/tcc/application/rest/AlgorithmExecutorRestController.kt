@@ -44,8 +44,8 @@ class AlgorithmExecutorRestController(
         println("Start running ${service.name} for ${elements.size} elements and typeof ${type.title()}")
 
         val result = when (DataType.valueOf(type)) {
-            DataType.FLOAT -> service.execute(elements.toList() as List<Float>)
-            DataType.INTEGER -> service.execute(elements.toList() as List<Int>)
+            DataType.FLOAT -> service.execute(elements.toMutableList() as MutableList<Float>)
+            DataType.INTEGER -> service.execute(elements.toMutableList() as MutableList<Int>)
             DataType.OBJECT -> service.execute(elements.toAnComparableObjectList())
             else -> throw IllegalArgumentException("Invalid parameter type $type. Expected one of: ${DataType.values()}.")
         }
@@ -61,7 +61,7 @@ fun String.title(): String {
     return "${first().toUpperCase()}${substring(1).toLowerCase()}"
 }
 
-fun Array<Any>.toAnComparableObjectList(): List<AnComparableObject> {
+fun Array<Any>.toAnComparableObjectList(): MutableList<AnComparableObject> {
     val gson = Gson()
-    return map { gson.fromJson(it.toString(), AnComparableObject::class.java) }
+    return map { gson.fromJson(it.toString(), AnComparableObject::class.java) }.toMutableList()
 }

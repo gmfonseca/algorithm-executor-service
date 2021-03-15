@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 class HeapSortService : GenericAlgorithmService {
     override val name: String = "Heap Sort"
 
-    override fun <T : Comparable<T>> execute(elements: List<T>): List<T> {
+    override fun <T : Comparable<T>> execute(elements: MutableList<T>): List<T> {
         return HeapSortAlgorithm<T>().sort(elements)
     }
 }
