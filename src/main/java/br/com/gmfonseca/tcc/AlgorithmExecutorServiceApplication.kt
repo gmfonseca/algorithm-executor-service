@@ -6,6 +6,9 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 open class AlgorithmExecutorServiceApplication
 
-fun main(args: Array<String>) {
-    runApplication<AlgorithmExecutorServiceApplication>(*args)
+object Application {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        runApplication<AlgorithmExecutorServiceApplication>(*args)
+    }
 }

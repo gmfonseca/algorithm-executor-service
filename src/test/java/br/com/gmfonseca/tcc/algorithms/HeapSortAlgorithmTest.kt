@@ -13,8 +13,8 @@ class HeapSortAlgorithmTest {
     @Test
     fun testSort_givenWorstCaseList_shouldReturnsSortedList() {
         // Mock
-        val list = listOf(5, 4, 3, 2, 1)
-        val expected = listOf(1, 2, 3, 4, 5)
+        val list = mutableListOf(5, 4, 3, 2, 1)
+        val expected = mutableListOf(1, 2, 3, 4, 5)
 
         // Run
         val actual = heapSortAlgorithm.sort(list)
@@ -26,8 +26,8 @@ class HeapSortAlgorithmTest {
     @Test
     fun testSort_givenBestCaseList_shouldReturnsSortedList() {
         // Mock
-        val list = listOf(1, 2, 3, 4, 5)
-        val expected = listOf(1, 2, 3, 4, 5)
+        val list = mutableListOf(1, 2, 3, 4, 5)
+        val expected = mutableListOf(1, 2, 3, 4, 5)
 
         // Run
         val actual = heapSortAlgorithm.sort(list)
@@ -39,8 +39,8 @@ class HeapSortAlgorithmTest {
     @Test
     fun testSort_givenMediumCaseList_shouldReturnsSortedList() {
         // Mock
-        val list = listOf(1, 2, 5, 4, 3)
-        val expected = listOf(1, 2, 3, 4, 5)
+        val list = mutableListOf(1, 2, 5, 4, 3)
+        val expected = mutableListOf(1, 2, 3, 4, 5)
 
         // Run
         val actual = heapSortAlgorithm.sort(list)
