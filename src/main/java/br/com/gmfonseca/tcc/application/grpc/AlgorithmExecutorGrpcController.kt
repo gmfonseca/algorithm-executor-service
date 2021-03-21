@@ -71,13 +71,13 @@ class AlgorithmExecutorGrpcController : AlgorithmExecutorServiceImplBase() {
 
         val result = when (request.dataCase) {
             AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.INTEGERLIST -> {
-                val resultList = service.execute(request.integerList.contentList)
+                val resultList = service.execute(request.integerList.contentList.toMutableList())
                 val integerList = AlgorithmExecutor.IntegerList.newBuilder().addAllContent(resultList).build()
                 AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setIntegerList(integerList).build()
             }
 
             AlgorithmExecutor.ExecuteSortAlgorithmRequest.DataCase.FLOATLIST -> {
-                val resultList = service.execute(request.floatList.contentList)
+                val resultList = service.execute(request.floatList.contentList.toMutableList())
                 val integerList = AlgorithmExecutor.FloatList.newBuilder().addAllContent(resultList).build()
                 AlgorithmExecutor.ExecuteAlgorithmResult.newBuilder().setFloatList(integerList).build()
             }
