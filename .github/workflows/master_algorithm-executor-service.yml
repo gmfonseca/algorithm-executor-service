@@ -30,4 +30,4 @@ jobs:
         app-name: 'algorithm-executor-service'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3f3d40744e0443368798917a3abce628 }}
-        package: '${{ github.workspace }}/libs/*.jar'
+        package: '${{ github.workspace }}/target/libs/*.jar'
