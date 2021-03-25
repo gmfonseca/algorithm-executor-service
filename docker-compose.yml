@@ -1,7 +1,8 @@
 version: "3.4"
-  services:
-    algorithm-executor-service:
-      build: .
-      ports:
-        - "8080:80"
-        - "9090:443"
+
+services:
+  algorithm-executor-service:
+    build: .
+    ports:
+      - "8080:80"
+      - "9090:443"
